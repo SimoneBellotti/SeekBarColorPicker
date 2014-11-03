@@ -4,14 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
-
 import it.bellotti.SeekBarColorPicker.R;
+
 
 public class MainActivity
         extends Activity {
 
-    private SeekBarColorPicker seekBarColor;
-    private LinearLayout linearLayout;
+//    private SeekBarColorPicker seekBarColor;
+//    private LinearLayout linearLayout;
 //    private ShapeDrawable shape;
 
     @Override
@@ -19,13 +19,24 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        seekBarColor = (SeekBarColorPicker) findViewById(R.id.seekbar_color);
-        linearLayout = (LinearLayout) findViewById(R.id.layout);
+        SeekBarColorPicker seekBarColor = (SeekBarColorPicker) findViewById(R.id.seekbar_color);
+        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layout);
         seekBarColor.setOnSeekBarColorChangedListener(new SeekBarColorPicker.OnColorChangedListener() {
+
             @Override
-            public void onColorChanged(int color) {
+            public void onProgressColorChanged(int color) {
+                Log.d("it.bellotti.seekbarcolorpicker.MainActivity", "onProgressColorChanged (line 27): " + Integer.toHexString(Math.abs(color)));
                 linearLayout.setBackgroundColor(color);
-                ///////
+            }
+
+            @Override
+            public void onStartColorChanged(int color) {
+
+            }
+
+            @Override
+            public void onStopColorChanged(int color) {
+
             }
         });
 
@@ -102,9 +113,6 @@ public class MainActivity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        //Here you can get the size!
-
-        Log.d("width", "width: " +  linearLayout.getWidth());
 
 //        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, linearLayout.getWidth(), 0.0f,
 //

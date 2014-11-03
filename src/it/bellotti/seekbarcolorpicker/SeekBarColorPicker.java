@@ -6,6 +6,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.SeekBar;
@@ -23,17 +24,33 @@ public class SeekBarColorPicker
     private int color;
     private OnColorChangedListener listener;
 
+
+
     /**
      * A callback that notifies clients when the color has changed
      */
     public interface OnColorChangedListener {
 
         /**
-         * Notification that the color has changed.
+         * Notify that the progress color level has changed.
          *
          * @param color the current color level
          */
-        public void onColorChanged(int color);
+        public void onProgressColorChanged(int color);
+
+        /**
+         * Notify the start progress level color.
+         *
+         * @param color the current color level
+         */
+        public void onStartColorChanged(int color);
+
+        /**
+         * Notify the stop progress level color.
+         *
+         * @param color the current color level
+         */
+        public void onStopColorChanged(int color);
     }
 
     public SeekBarColorPicker(Context context) {
@@ -55,17 +72,39 @@ public class SeekBarColorPicker
 
         setMax(256 * 7 - 1);
 
-        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, 420f, 0.0f,
-                new int[]{0xFF000000, 0xFF0000FF, 0xFF00FF00, 0xFF00FFFF,
-                        0xFFFF0000, 0xFFFF00FF, 0xFFFFFF00, 0xFFFFFFFF},
-                null, Shader.TileMode.CLAMP
-        );
+//        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, 420f, 0.0f,
+//                new int[]{0xFF000000, 0xFF0000FF, 0xFF00FF00, 0xFF00FFFF,
+//                        0xFFFF0000, 0xFFFF00FF, 0xFFFFFF00, 0xFFFFFFFF},
+//                null, Shader.TileMode.CLAMP
+//        );
 
-        ShapeDrawable shape = new ShapeDrawable(new RectShape());
+//        ShapeDrawable shape = new ShapeDrawable(new RectShape());
+//        shape.getPaint().setShader(linearGradient);
+
+//        setProgressDrawable(shape);
+        setOnSeekBarChangeListener(this);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+//        float density = getResources().getDisplayMetrics().density;
+//        width = (int) (width / density);
+
+        float radius = (h / 2);
+        ShapeDrawable shape = new ShapeDrawable(new RoundRectShape(
+                new float[]{radius, radius, radius, radius, radius, radius, radius, radius}
+                , null, null
+        ));
+
+
+        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, w, 0.0f,
+                new int[]{0xFF000000, 0xFF0000FF, 0xFF00FF00, 0xFF00FFFF, 0xFFFF0000, 0xFFFF00FF, 0xFFFFFF00, 0xFFFFFFFF},
+                null, Shader.TileMode.CLAMP);
+
         shape.getPaint().setShader(linearGradient);
 
         setProgressDrawable(shape);
-        setOnSeekBarChangeListener(this);
     }
 
     /**
@@ -87,19 +126,25 @@ public class SeekBarColorPicker
 //            color = changeColor(progress);
             int color = changeColor(progress);
             if (listener != null) {
-                listener.onColorChanged(color);
+                listener.onProgressColorChanged(color);
             }
         }
     }
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
+        int color = changeColor(seekBar.getProgress());
+        if (listener != null) {
+            listener.onStartColorChanged(color);
+        }
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
+        int color = changeColor(seekBar.getProgress());
+        if (listener != null) {
+            listener.onStopColorChanged(color);
+        }
     }
 
     private int changeColor(int progress) {
