@@ -1,6 +1,7 @@
 SeekBarColorPicker
 ==================
 
+![SeekBarColorPicker](https://raw.githubusercontent.com/SimoneBellotti/SeekBarColorPicker/bdd553fce53555a1ba3ce71fe56d91d9e01a3a9f/screenshot.gif)
 
 License
 ==================
