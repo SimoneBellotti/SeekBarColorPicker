@@ -10,10 +10,6 @@ import it.bellotti.SeekBarColorPicker.R;
 public class MainActivity
         extends Activity {
 
-//    private SeekBarColorPicker seekBarColor;
-//    private LinearLayout linearLayout;
-//    private ShapeDrawable shape;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,23 +36,6 @@ public class MainActivity
             }
         });
 
-
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
-//        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, linearLayout.getWidth(), 0.0f,
-//
-//                new int[] { 0xFF000000, 0xFF0000FF, 0xFF00FF00, 0xFF00FFFF,
-//                        0xFFFF0000, 0xFFFF00FF, 0xFFFFFF00, 0xFFFFFFFF},
-//                null, Shader.TileMode.CLAMP);
-//
-//        shape = new ShapeDrawable(new RectShape());
-//        shape.getPaint().setShader(linearGradient);
-//
-//        seekBarFont.setProgressDrawable(shape);
 
     }
 }

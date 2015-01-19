@@ -25,7 +25,6 @@ public class SeekBarColorPicker
     private int color;
     private OnColorChangedListener listener;
 
-
     /**
      * A callback that notifies clients when the color has changed
      */
@@ -69,26 +68,13 @@ public class SeekBarColorPicker
     }
 
     private void init() {
-
         setMax(256 * 7 - 1);
         setOnSeekBarChangeListener(this);
-        //        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, 420f, 0.0f,
-//                new int[]{0xFF000000, 0xFF0000FF, 0xFF00FF00, 0xFF00FFFF,
-//                        0xFFFF0000, 0xFFFF00FF, 0xFFFFFF00, 0xFFFFFFFF},
-//                null, Shader.TileMode.CLAMP
-//        );
-
-//        ShapeDrawable shape = new ShapeDrawable(new RectShape());
-//        shape.getPaint().setShader(linearGradient);
-
-//        setProgressDrawable(shape);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-//        float density = getResources().getDisplayMetrics().density;
-//        width = (int) (width / density);
         createSeekBar(w, h);
     }
 
@@ -108,7 +94,6 @@ public class SeekBarColorPicker
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser) {
-//            color = changeColor(progress);
             color = changeColor(progress);
             if (listener != null) {
                 listener.onProgressColorChanged(color);
@@ -183,7 +168,7 @@ public class SeekBarColorPicker
             b = progress % 256;
         }
 
-        return Color.rgb(r, g, b);
+        return Color.argb(255, r, g, b);
 
     }
 }
