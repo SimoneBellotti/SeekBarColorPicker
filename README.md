@@ -3,7 +3,7 @@ SeekBarColorPicker
 
 a simple color picker for Android. Project based on this question http://stackoverflow.com/questions/4342757/how-to-make-a-color-gradient-in-a-seekbar
 
-![SeekBarColorPicker](https://raw.githubusercontent.com/SimoneBellotti/SeekBarColorPicker/art/bdd553fce53555a1ba3ce71fe56d91d9e01a3a9f/screenshot.gif)
+![SeekBarColorPicker](https://raw.githubusercontent.com/SimoneBellotti/SeekBarColorPicker/master/art/screenshot.gif)
 
 License
 ==================
